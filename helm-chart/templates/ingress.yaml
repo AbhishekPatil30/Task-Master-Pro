@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1
+apiVersion: networking.k8s.io/v1 # API version for Ingress resource
 kind: Ingress
 metadata:
   name: taskmaster-ingress
@@ -6,7 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: taskmaster.local
+    - host: taskmaster.local # Replace with your domain
       http:
         paths:
           - path: /
@@ -16,3 +16,7 @@ spec:
                 name: taskmaster-ssvc
                 port:
                   number: 80
+  tls: # Enable TLS for HTTPS (Optional)
+    - hosts:
+        - taskmaster.local
+      secretName: taskmaster-tls-secret # Provide a TLS secret for HTTPS (optional)
